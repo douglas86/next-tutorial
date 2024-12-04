@@ -1,0 +1,41 @@
+services:
+  database:
+    image: postgres:17.2
+    container_name: database
+    restart: always
+    shm_size: 1gb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    depends_on:
+      database:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - pnpm-store:/pnpm-store
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - PNPM_HOME=/pnpm-store
+      - PATH//pnpm-store:$PATH
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/postgres?schema=public
+
+volumes:
+  pnpm-store:
