@@ -1,12 +1,17 @@
 {
   "private": true,
+  "prisma": {
+    "seed": "ts-node -r tsconfig-paths/register prisma/seed.ts"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "seed": "pnpm prisma db seed"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@prisma/client": "6.1.0",
     "@tailwindcss/forms": "^0.5.9",
     "@vercel/postgres": "^0.10.0",
     "autoprefixer": "10.4.20",
@@ -15,10 +20,10 @@
     "next": "latest",
     "next-auth": "5.0.0-beta.19",
     "postcss": "8.4.49",
+    "prisma": "^6.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "tailwindcss": "3.4.16",
-    "typescript": "5.7.2",
     "use-debounce": "^10.0.4",
     "zod": "^3.23.8"
   },
@@ -27,6 +32,10 @@
     "@types/node": "22.10.1",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
-    "prettier": "^3.4.2"
-  }
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "5.7.2"
+  },
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
