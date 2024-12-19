@@ -4,12 +4,18 @@ import prisma from "@/app/lib/prisma";
 // import { Invoice } from "@/app/lib/definitions";
 
 export async function fetchRevenue() {
-  try {
-    return await prisma.revenue.findMany();
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
-  }
+  const response = await prisma.revenue.findMany();
+
+  if (!response) throw new Error("Failed to fetch revenue");
+
+  return Array.isArray(response) ? [...response] : [];
+
+  // try {
+  //   return await prisma.revenue.findMany();
+  // } catch (error) {
+  //   console.error("Database Error:", error);
+  //   throw new Error("Failed to fetch revenue data.");
+  // }
 }
 
 // export async function fetchRevenue() {
