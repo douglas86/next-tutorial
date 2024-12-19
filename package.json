@@ -7,6 +7,7 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "start": "next start",
+    "prisma": "npx prisma studio",
     "seed": "pnpm prisma db seed"
   },
   "dependencies": {
