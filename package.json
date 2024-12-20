@@ -8,7 +8,8 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "prisma": "npx prisma studio",
-    "seed": "pnpm prisma db seed"
+    "seed": "pnpm prisma db seed",
+    "docker": "docker-compose up"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
