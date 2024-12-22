@@ -1,5 +1,6 @@
 import { formatCurrency } from "./utils";
 import prisma from "@/app/lib/prisma";
+import { Prisma } from "@prisma/client";
 // import { list } from "postcss";
 // import { Invoice } from "@/app/lib/definitions";
 
@@ -159,6 +160,12 @@ export async function fetchFilteredInvoices(
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
+  // Validate and sanitize query inputs
+  const parsedAmount = !isNaN(Number(query)) ? Number(query) : undefined;
+  const parsedDate = !isNaN(Date.parse(query)) ? new Date(query) : undefined;
+
+  console.log("query", query);
+
   try {
     return await prisma.invoice.findMany({
       skip: offset,
@@ -167,10 +174,12 @@ export async function fetchFilteredInvoices(
         OR: [
           { Customer: { name: { contains: query, mode: "insensitive" } } },
           { Customer: { email: { contains: query, mode: "insensitive" } } },
-          { amount: { equals: Number(query) || undefined } },
-          { date: { equals: query ? new Date(query) : undefined } },
+          parsedAmount !== undefined
+            ? { amount: { equals: parsedAmount } }
+            : undefined,
+          parsedDate !== undefined ? { date: parsedDate } : undefined,
           { status: { contains: query, mode: "insensitive" } },
-        ],
+        ].filter(Boolean) as Prisma.InvoiceWhereInput[],
       },
       include: {
         Customer: true,
@@ -220,16 +229,22 @@ export async function fetchFilteredInvoices(
 // }
 
 export async function fetchInvoicesPages(query: string) {
+  // Validate and sanitize query inputs
+  const parsedAmount = !isNaN(Number(query)) ? Number(query) : undefined;
+  const parsedDate = !isNaN(Date.parse(query)) ? new Date(query) : undefined;
+
   try {
     const count = await prisma.invoice.count({
       where: {
         OR: [
           { Customer: { name: { contains: query, mode: "insensitive" } } },
           { Customer: { email: { contains: query, mode: "insensitive" } } },
-          { amount: { equals: Number(query) || undefined } },
-          { date: { equals: query ? new Date(query) : undefined } },
+          parsedAmount !== undefined
+            ? { amount: { equals: parsedAmount } }
+            : undefined,
+          parsedDate !== undefined ? { date: parsedDate } : undefined,
           { status: { contains: query, mode: "insensitive" } },
-        ],
+        ].filter(Boolean) as Prisma.InvoiceWhereInput[],
       },
     });
 
