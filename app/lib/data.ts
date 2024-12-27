@@ -1,5 +1,5 @@
 import { formatCurrency } from "./utils";
-import prisma from "@/app/lib/prisma";
+import { prisma } from "@/app/lib/prisma";
 import { Prisma } from "@prisma/client";
 // import { list } from "postcss";
 // import { Invoice } from "@/app/lib/definitions";
@@ -15,7 +15,7 @@ export async function fetchRevenue() {
   //   return await prisma.revenue.findMany();
   // } catch (error) {
   //   console.error("Database Error:", error);
-  //   throw new Error("Failed to fetch revenue data.");
+  //   throw new Error ("Failed to fetch revenue data.");
   // }
 }
 

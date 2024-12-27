@@ -49,8 +49,8 @@ export default async function InvoicesTable({
                     <p>{formatDateToLocal(invoice.date.toISOString())}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={String(invoice.Customer.id)} />
-                    <DeleteInvoice id={String(invoice.Customer.id)} />
+                    <UpdateInvoice id={String(invoice.id)} />
+                    <DeleteInvoice id={String(invoice.id)} />
                   </div>
                 </div>
               </div>
@@ -111,8 +111,8 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateInvoice id={String(invoice.Customer.id)} />
-                      <DeleteInvoice id={String(invoice.Customer.id)} />
+                      <UpdateInvoice id={String(invoice.id)} />
+                      <DeleteInvoice id={String(invoice.id)} />
                     </div>
                   </td>
                 </tr>
