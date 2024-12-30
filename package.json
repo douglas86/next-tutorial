@@ -9,8 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "prisma": "npx prisma studio",
-    "seed": "pnpm prisma db seed",
-    "docker": "docker-compose up"
+    "seed": "npx prisma db seed",
+    "docker": "docker-compose up",
+    "remove": "rm -rf node_modules && rm -rf .next && pnpm store prune"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
