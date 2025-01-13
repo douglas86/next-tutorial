@@ -92,7 +92,7 @@ model Customer {
 }
 
 model Invoice {
-  id          String @id @default(cuid())
+  id String @id @default(cuid())
   customer_id String
   amount      Int
   status      String   @db.VarChar(255)
