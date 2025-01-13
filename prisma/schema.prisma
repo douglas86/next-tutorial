@@ -83,7 +83,7 @@ model Authenticator {
 }
 
 model Customer {
-  id String @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String    @db.VarChar(255)
   email     String    @db.VarChar(255)
   image_url String    @db.VarChar(255)
@@ -91,7 +91,7 @@ model Customer {
 }
 
 model Invoice {
-  id String @id @default(cuid())
+  id          String   @id @default(cuid())
   customer_id String
   amount      Int
   status      String   @db.VarChar(255)
