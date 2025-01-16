@@ -4,12 +4,12 @@ import { z } from "zod";
 import { prisma } from "./prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
+// import { signIn } from "@/auth";
+// import { AuthError } from "next-auth";
 
 const FormSchema = z.object({
-  id: z.number(),
-  customer_id: z.coerce.number(),
+  id: z.string(),
+  customer_id: z.coerce.string(),
   amount: z.coerce.number().gt(0, { message: "Please enter a valid amount" }),
   status: z.enum(["pending", "paid"], {
     invalid_type_error: "Please enter a valid status",
@@ -115,7 +115,7 @@ export async function updateInvoice(
 
   try {
     await prisma.invoice.update({
-      where: { id: Number(id) },
+      where: { id: id },
       data: {
         customer_id,
         amount: amountInCents,
@@ -135,7 +135,7 @@ export async function updateInvoice(
 export async function deleteInvoice(id: string) {
   try {
     await prisma.invoice.delete({
-      where: { id: Number(id) },
+      where: { id: id },
     });
   } catch (error) {
     return {
@@ -147,21 +147,21 @@ export async function deleteInvoice(id: string) {
   revalidatePath("/dashboard/invoices");
 }
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-    await signIn("credentials", formData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return "Invalid Credentials";
-        default:
-          return "Something went wrong";
-      }
-    }
-    throw error;
-  }
-}
+// export async function authenticate(
+//   prevState: string | undefined,
+//   formData: FormData,
+// ) {
+//   try {
+//     await signIn("credentials", formData);
+//   } catch (error) {
+//     if (error instanceof AuthError) {
+//       switch (error.type) {
+//         case "CredentialsSignin":
+//           return "Invalid Credentials";
+//         default:
+//           return "Something went wrong";
+//       }
+//     }
+//     throw error;
+//   }
+// }

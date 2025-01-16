@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "next lint",
     "prisma": "npx prisma studio",
-    "seed": "npx prisma db seed",
     "docker": "docker-compose up",
     "remove": "rm -rf node_modules && rm -rf .next && pnpm store prune"
   },
