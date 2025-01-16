@@ -16,8 +16,10 @@ datasource db {
 
 model User {
   id            String          @id @default(cuid())
-  name          String          @db.VarChar(255)
-  email         String          @unique @db.Text
+  name          String          @db.VarChar(255) /// @encrypted
+  nameHash      String? /// @encryption:hash(name)
+  email         String          @unique /// @encrypted
+  emailHash     String?         @unique /// @encryption:hash(email)
   emailVerified DateTime?
   image         String?
   role          String          @default("user")
