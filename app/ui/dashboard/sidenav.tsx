@@ -2,8 +2,7 @@ import Link from "next/link";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 import AcmeLogo from "@/app/ui/acme-logo";
 import { PowerIcon } from "@heroicons/react/24/outline";
-import { Button } from "@/app/ui/button"
-// import { signOut } from "@/auth";
+import LogoutButton from "@/app/ui/dashboard/sign-out"
 
 export default function SideNav() {
   return (
@@ -21,11 +20,7 @@ export default function SideNav() {
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
       </div>
       <div>
-        <Button>
-          <svg mlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-          </svg>
-        </Button>
+        <LogoutButton />
       </div>
     </div>
   )
