@@ -8,8 +8,18 @@ import {
   LatestInvoicesSkeleton,
   CardSkeleton,
 } from "@/app/ui/skeletons";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function Page() {
+  const session = await getServerSession(authOptions);
+
+  // when a user isn't logged in redirect to homepage
+  if (!session) {
+    redirect(`/`);
+  }
+
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>

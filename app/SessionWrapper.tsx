@@ -8,7 +8,7 @@ const SessionWrapper = ({ children }: { children: ReactNode }) => {
     <>
       <SessionProvider>{children}</SessionProvider>
     </>
-  )
-}
+  );
+};
 
-export default SessionWrapper
+export default SessionWrapper;
