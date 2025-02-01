@@ -7,11 +7,19 @@ import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "@/app/ui/button";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Page() {
+  const router = useRouter();
   const { data: session } = useSession();
 
-  console.log("session", session);
+  // when a user is logged in redirect to dashboard page
+  useEffect(() => {
+    if (session) {
+      router.push("/dashboard");
+    }
+  }, [session]);
 
   return (
     <main className="flex min-h-screen flex-col p-6">
