@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import React from "react";
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -19,32 +20,54 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
-  { name: "Swagger", href: "/dashboard/swagger", icon: DocumentDuplicateIcon },
+];
+
+// Map to links to display in the side navigation
+// Only when developing locally
+const developmentLinks = [
+  {
+    name: "Swagger",
+    href: "/dashboard/swagger",
+    icon: DocumentDuplicateIcon,
+  },
 ];
 
 export default function NavLinks() {
   const pathname = usePathname();
 
+  // define the type for the display arrow function
+  interface NavItems {
+    icon: React.ElementType;
+    href: string;
+    name: string;
+  }
+
+  const display = (item: NavItems) => {
+    const Icon = item.icon;
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        className={clsx(
+          "flex h-[46px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
+          {
+            "bg-sky-100 text-blue-600": pathname === item.href,
+          },
+        )}
+      >
+        <Icon className="w-6" />
+        <p className="hidden md:block">{item.name}</p>
+      </Link>
+    );
+  };
+
   return (
     <>
-      {links.map((link) => {
-        const LinkIcon = link.icon;
-        return (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={clsx(
-              "flex h-[46px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
-              {
-                "bg-sky-100 text-blue-600": pathname === link.href,
-              },
-            )}
-          >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
-        )
-      })}
+      {/*display all links*/}
+      {links.map((link) => display(link))}
+      {/*only display links that are for development*/}
+      {process.env.NODE_ENV === "development" &&
+        developmentLinks.map((link) => display(link))}
     </>
   );
 }
