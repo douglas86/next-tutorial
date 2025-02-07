@@ -1,47 +1,48 @@
 // This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
 // https://nextjs.org/learn/dashboard-app/fetching-data
+import cuid from "cuid";
+
 const users = [
   {
-    id: 1,
+    id: cuid(),
     name: "User",
     email: "user@nextmail.com",
-    password: "123456",
   },
 ];
 
 const customers = [
   {
-    id: 1,
+    id: cuid(),
     name: "Evil Rabbit",
     email: "evil@rabbit.com",
     image_url: "/customers/evil-rabbit.png",
   },
   {
-    id: 2,
+    id: cuid(),
     name: "Delba de Oliveira",
     email: "delba@oliveira.com",
     image_url: "/customers/delba-de-oliveira.png",
   },
   {
-    id: 3,
+    id: cuid(),
     name: "Lee Robinson",
     email: "lee@robinson.com",
     image_url: "/customers/lee-robinson.png",
   },
   {
-    id: 4,
+    id: cuid(),
     name: "Michael Novotny",
     email: "michael@novotny.com",
     image_url: "/customers/michael-novotny.png",
   },
   {
-    id: 5,
+    id: cuid(),
     name: "Amy Burns",
     email: "amy@burns.com",
     image_url: "/customers/amy-burns.png",
   },
   {
-    id: 6,
+    id: cuid(),
     name: "Balazs Orban",
     email: "balazs@orban.com",
     image_url: "/customers/balazs-orban.png",
@@ -50,91 +51,91 @@ const customers = [
 
 const invoices = [
   {
-    id: 1,
+    id: cuid(),
     customer_id: customers[0].id,
     amount: 15795,
     status: "pending",
     date: "2022-12-06",
   },
   {
-    id: 2,
+    id: cuid(),
     customer_id: customers[1].id,
     amount: 20348,
     status: "pending",
     date: "2022-11-14",
   },
   {
-    id: 3,
+    id: cuid(),
     customer_id: customers[4].id,
     amount: 3040,
     status: "paid",
     date: "2022-10-29",
   },
   {
-    id: 4,
+    id: cuid(),
     customer_id: customers[3].id,
     amount: 44800,
     status: "paid",
     date: "2023-09-10",
   },
   {
-    id: 5,
+    id: cuid(),
     customer_id: customers[5].id,
     amount: 34577,
     status: "pending",
     date: "2023-08-05",
   },
   {
-    id: 6,
+    id: cuid(),
     customer_id: customers[2].id,
     amount: 54246,
     status: "pending",
     date: "2023-07-16",
   },
   {
-    id: 7,
+    id: cuid(),
     customer_id: customers[0].id,
     amount: 666,
     status: "pending",
     date: "2023-06-27",
   },
   {
-    id: 8,
+    id: cuid(),
     customer_id: customers[3].id,
     amount: 32545,
     status: "paid",
     date: "2023-06-09",
   },
   {
-    id: 9,
+    id: cuid(),
     customer_id: customers[4].id,
     amount: 1250,
     status: "paid",
     date: "2023-06-17",
   },
   {
-    id: 10,
+    id: cuid(),
     customer_id: customers[5].id,
     amount: 8546,
     status: "paid",
     date: "2023-06-07",
   },
   {
-    id: 11,
+    id: cuid(),
     customer_id: customers[1].id,
     amount: 500,
     status: "paid",
     date: "2023-08-19",
   },
   {
-    id: 12,
+    id: cuid(),
     customer_id: customers[5].id,
     amount: 8945,
     status: "paid",
     date: "2023-06-03",
   },
   {
-    id: 13,
+    id: cuid(),
     customer_id: customers[2].id,
     amount: 1000,
     status: "paid",

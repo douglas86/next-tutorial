@@ -1,0 +1,14 @@
+openapi: 3.1.0
+info:
+  title: Next.js API
+  description: Next.js API
+  version: 1.0.0
+paths:
+  /api/hello:
+    get:
+      tags:
+        - Hello
+      summary: Returns hello world
+      responses:
+        "200":
+          description: Successful response

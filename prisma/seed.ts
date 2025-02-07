@@ -1,28 +1,26 @@
 // seed.ts for Prisma Database
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 import {
   customers,
   invoices,
   revenue,
   users,
 } from "@/app/lib/placeholder-data";
+import cuid from "cuid";
 
 const prisma = new PrismaClient();
 
 async function seedUsers() {
   for (const user of users) {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
     await prisma.user.upsert({
       where: {
         id: user.id,
       },
       update: {},
       create: {
-        id: user.id,
+        id: cuid(),
         name: user.name,
         email: user.email,
-        password: hashedPassword,
       },
     });
   }
