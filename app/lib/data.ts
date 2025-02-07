@@ -1,6 +1,7 @@
 import { formatCurrency } from "./utils";
 import { prisma } from "@/app/lib/prisma";
-// import { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import cuid from "cuid";
 
 export async function fetchRevenue() {
   const response = await prisma.revenue.findMany();
@@ -94,7 +95,7 @@ export async function fetchFilteredInvoices(
             : undefined,
           parsedDate !== undefined ? { date: parsedDate } : undefined,
           { status: { contains: query, mode: "insensitive" } },
-        ].filter(Boolean) as prisma.InvoiceWhereInput[],
+        ].filter(Boolean) as Prisma.InvoiceWhereInput[],
       },
       include: {
         Customer: true,
@@ -134,9 +135,9 @@ export async function fetchInvoicesPages(query: string) {
   }
 }
 
-export async function fetchInvoiceById(id: string) {
+export async function fetchInvoiceById() {
   const invoice = await prisma.invoice.findUnique({
-    where: { id: Number(id) },
+    where: { id: cuid() },
   });
 
   if (!invoice) throw new Error("Invoice not found.");
@@ -185,7 +186,7 @@ export async function fetchFilteredCustomers(query: string) {
     };
 
     type CustomerWithInvoices = {
-      id: number;
+      id: string;
       name: string;
       email: string;
       Invoices: Invoice[];
